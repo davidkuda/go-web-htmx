@@ -1,0 +1,13 @@
+html {
+	background-color: var(--base);
+	transition:
+		background-color 0.5s ease,
+		color 0.5s ease;
+}
+
+body {
+	font-family: sans-serif;
+	font-optical-sizing: auto;
+	color: var(--text);
+	line-height: 1.5;
+}
