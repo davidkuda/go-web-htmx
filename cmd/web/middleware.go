@@ -39,10 +39,6 @@ func logRequest(next http.Handler) http.Handler {
 func commonHeaders(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		// JS: script-src:
-		setTheme := "'sha256-iPh555NGYFuqXa3x4Etpt6REdQ/TiOrBh3UPr3/vH5s='"
-		highlightJS := "'sha256-KuW8nrMYej09eTtZkBNDwTy8Yn05dABB5v2dLSEPgTY='"
-
 		// style-src:
 		htmx := "'sha256-faU7yAF8NxuMTNEwVmBz+VcYeIoBQ2EMHW3WaVxCvnk='"
 
@@ -50,8 +46,8 @@ func commonHeaders(next http.Handler) http.Handler {
 			"Content-Security-Policy",
 			"default-src 'self';"+
 				"img-src 'self' images.ctfassets.net;"+
-				fmt.Sprintf("script-src 'self' cdnjs.cloudflare.com cdn.jsdelivr.net %s %s;", setTheme, highlightJS)+
-				fmt.Sprintf("style-src 'self' cdnjs.cloudflare.com fonts.googleapis.com %s;", htmx)+
+				"script-src 'self';"+
+				fmt.Sprintf("style-src 'self' %s;", htmx)+
 				"font-src fonts.gstatic.com",
 		)
 		w.Header().Set("Referrer-Policy", "origin-when-cross-origin")
