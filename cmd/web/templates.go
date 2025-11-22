@@ -14,8 +14,14 @@ type templateData struct {
 	Title    string
 	Path     string
 	RootPath string
-	HTML     template.HTML
+	User     User
 	Error    Error
+}
+
+type User struct {
+	Authenticated bool
+	ID            string
+	Email         string
 }
 
 type Error struct {
@@ -48,6 +54,7 @@ func (app *application) newTemplateData(r *http.Request) templateData {
 		Title:    title,
 		RootPath: rootPath,
 		Path:     r.URL.Path,
+		User:     User{},
 	}
 }
 

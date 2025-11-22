@@ -1,0 +1,11 @@
+{{ define "main" }}
+  <h1>OpenID Connect Demo</h1>
+  {{ if .User.Authenticated }}
+    <p>hello user {{ .User.Email }}</p>
+    <p>your ID is {{ .User.ID }}</p>
+    <a href="/me"><button>me</button></a>
+    <a href="/logout"><button>logout</button></a>
+  {{ else }}
+    <a href="/login" hx-boost="false"><button>login</button></a>
+  {{ end }}
+{{ end }}
