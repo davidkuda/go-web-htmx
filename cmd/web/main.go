@@ -13,10 +13,8 @@ import (
 )
 
 type application struct {
-	models models.Models
-
-	templateCache     map[string]*template.Template
-	templateCacheHTMX map[string]*template.Template
+	models        models.Models
+	templateCache map[string]*template.Template
 }
 
 func main() {
@@ -35,11 +33,6 @@ func main() {
 	app.models = models.New(db)
 
 	app.templateCache, err = newTemplateCache(true)
-	if err != nil {
-		log.Fatalf("could not initialise templateCache: %v\n", err)
-	}
-
-	app.templateCacheHTMX, err = newTemplateCache(false)
 	if err != nil {
 		log.Fatalf("could not initialise templateCache: %v\n", err)
 	}

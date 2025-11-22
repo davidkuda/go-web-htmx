@@ -80,7 +80,6 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 	buf.WriteTo(w)
 }
 
-// for HTMX, you will not need the base.tmpl.html template.
 func newTemplateCache(includeBase bool) (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
 
@@ -103,24 +102,13 @@ func newTemplateCache(includeBase bool) (map[string]*template.Template, error) {
 
 		var files []string
 
-		if includeBase {
-			// with base.tmpl.html
-			N := 1 + len(partials) + 1
-			files = make([]string, N)
-			files[0] = "./ui/html/base.tmpl.html"
-			for i, partial := range partials {
-				files[i+1] = partial
-			}
-			files[N-1] = page
-		} else {
-			// without base.tmpl.html
-			N := 1 + len(partials)
-			files = make([]string, N)
-			files[0] = page
-			for i, partial := range partials {
-				files[i+1] = partial
-			}
+		N := 1 + len(partials) + 1
+		files = make([]string, N)
+		files[0] = "./ui/html/base.tmpl.html"
+		for i, partial := range partials {
+			files[i+1] = partial
 		}
+		files[N-1] = page
 
 		tmpl := template.New("base").Funcs(funcs)
 		t, err := tmpl.ParseFiles(files...)
