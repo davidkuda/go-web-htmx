@@ -42,3 +42,12 @@ mv \
 # after running the migration:
 git restore migrations/000001_create_roles.up.sql
 ```
+
+
+Another way would be to create users without passwords and then alter them with a generated password:
+
+```sh
+PASS=$(openssl rand -base64 24)
+psql -c "ALTER ROLE david WITH PASSWORD '$PASS';"
+echo "Generated password: $PASS"
+```
