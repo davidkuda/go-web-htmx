@@ -66,27 +66,10 @@ TO application;
 --------------------------------------------------------------------
 -- Roles: Users: (with login) --------------------------------------
 
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
--- create a user with a random 20 character password
-DO $$
-DECLARE
-    pass TEXT := encode(gen_random_bytes(15), 'base64');
-BEGIN
-    EXECUTE format('CREATE ROLE david LOGIN PASSWORD %L', pass);
-    RAISE NOTICE 'Generated password: %', pass;
-END $$;
-
+CREATE ROLE david LOGIN PASSWORD '${PG_PASSWORD_DAVID}';
 GRANT developer TO david;
 
-DO $$
-DECLARE
-    pass TEXT := encode(gen_random_bytes(15), 'base64');
-BEGIN
-    EXECUTE format('CREATE ROLE gokanban LOGIN PASSWORD %L', pass);
-    RAISE NOTICE 'Generated password: %', pass;
-END $$;
-
+CREATE ROLE gokanban LOGIN PASSWORD '${PG_PASSWORD_GOKANBAN}';
 GRANT application TO gokanban;
 
 COMMIT;
