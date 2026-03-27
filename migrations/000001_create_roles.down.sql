@@ -1,9 +1,6 @@
 begin;
 
-drop role gokanban;
-drop role david;
-
-revoke all on schema gokanban from application;
+alter database gokanban reset search_path;
 
 alter default privileges
 for role developer
@@ -15,13 +12,20 @@ for role developer
 in schema gokanban
 revoke all on sequences from application;
 
-drop role application;
+revoke all on schema gokanban from application;
+revoke application from gokanban;
+revoke developer from david;
 
-alter database gokanban OWNER TO transcribo;
+drop owned by gokanban;
+drop owned by david;
+drop owned by application;
+drop owned by developer;
 
-DROP OWNED BY developer;
+drop schema if exists gokanban;
 
-drop role developer;
-drop schema gokanban;
+drop role if exists gokanban;
+drop role if exists david;
+drop role if exists application;
+drop role if exists developer;
 
 commit;
