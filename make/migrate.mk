@@ -3,6 +3,10 @@
 PG_DSN = postgres://${DB_USER}:${DB_PASSWORD}@${DB_ADDRESS}/${DB_NAME}?sslmode=disable
 PG_DSN = ${PG_DSN_ADMIN}
 
+db/migrate/psql:
+	@psql ${PG_DSN} --command "drop table if exists schema_migrations;"
+	@psql ${PG_DSN} --file ./migrations/000001_create_roles.down.sql
+
 db/migrate/newsql:
 	@migrate create \
 	-seq \
