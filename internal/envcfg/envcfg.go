@@ -25,7 +25,6 @@ type db struct {
 	Password string
 }
 
-
 func DB() (*sql.DB, error) {
 	c := db{
 		Scheme:   os.Getenv("DB_SCHEME"),

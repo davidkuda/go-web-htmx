@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/davidkuda/bellevue/internal/envcfg"
-	"github.com/davidkuda/bellevue/internal/models"
+	"github.com/davidkuda/gokanban/internal/envcfg"
+	"github.com/davidkuda/gokanban/internal/models"
 
 	"github.com/coreos/go-oidc/v3/oidc"
 	_ "github.com/jackc/pgx/v5/stdlib"
